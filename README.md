@@ -6,3 +6,8 @@ It is pretty easy; however, i has been a while since I wrote one of these.
 Unfortunately the linked list i wrote wasn't working the way I wanted. For
 these reason, I decided to practice and write one. This repo contains a version
 of a simple linked list.
+
+TODO:
+    - Have some errors while deleting some elements. Could improve on how they
+      get deleted. Maybe use recursion.
+
