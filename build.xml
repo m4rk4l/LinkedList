@@ -1,0 +1,106 @@
+<project name="LinkedList" default="compile" basedir=".">
+    <property file="${user.home}/build.properties"/>
+    <property file="default.properties"/>
+
+    <path id="project.classpath">
+        <pathelement location="${classes.dir}"/>
+
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+<!-- ******************** clean target *************************** -->
+
+    <target        name="clean"
+            description="Delete old build">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${docs.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+<!-- *********************** compile **************************** -->
+    <target        name="compile"
+                depends="clean"
+            description="Builds application ready to run locally">
+        <mkdir dir="${classes.dir}"/>
+
+        <javac
+               includeantruntime="false"
+                          srcdir="${src.dir}"
+                         destdir="${classes.dir}"
+                           debug="${compile.debug}"
+                     deprecation="${compile.deprecation}"
+                        optimize="${compile.optimize}"
+               memoryinitialsize="32m"
+               memorymaximumsize="32m"
+                            fork="true">
+
+            <classpath refid="project.classpath"/>
+
+            <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-Xlint:-path"/>
+        </javac>
+    </target>
+
+
+<!-- ************************* docs **************************** -->
+    <target        name="doc"
+            description="Create Javadoc API documentation">
+
+        <mkdir dir="${docs.dir}/api"/>
+
+        <javadoc sourcepath="${src.dir}"
+                    destdir="${docs.dir}/\${docs.api.dir}"
+                     author="${docs.show.author}"
+                    version="${docs.show.version}"
+                     access="${docs.show.access}"
+               packagenames="*">
+            <classpath refid="project.classpath"/>
+
+            <link href="${docs.jdk.javadoc.url}" />
+            <link href="${docs.junit.javadoc.url}" />
+
+            <tag name="invariant"      description="Representation Invariant:"
+                                             scope="types"/>
+            <tag name="requires"       description="Requires:"
+                                             scope="types"/>
+            <tag name="version"/>
+            <tag name="author"/>
+            <tag name="param"/>
+            <tag name="precondition"   description="Preconditions:"
+                                             scope="constructors, methods"/>
+            <tag name="postcondition"  description="Postconditions:"
+                                             scope="constructors, methods"/>
+            <tag name="preserves"      description="Preserves:"
+                                             scope="constructors, methods"/>
+            <tag name="return"/>
+            <tag name="throws"/>
+
+            <tag name="example" description="Example:"/>
+        </javadoc>
+    </target>
+
+<!-- ***************** excecutable jar ************************ -->
+    <target         name="dist"
+                 depends="compile"
+             description="generates an executable jar">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/${project.name}.jar"
+              basedir="${classes.dir}">
+        <manifest>
+            <attribute name="Main-Class"
+                      value="${package}/${project.name}/${main.class}"/>
+        </manifest>
+        </jar>
+    </target>
+
+<!-- ***************** excecutable jar ************************ -->
+    <target         name="run"
+                 depends="dist"
+             description="excecute compiled jar file.">
+        <java jar="${dist.dir}/${project.name}.jar" fork="true">
+            <arg value="Hello!!"/>
+        </java>
+    </target>
+</project>
