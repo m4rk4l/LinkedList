@@ -4,8 +4,9 @@ import java.lang.Integer;
 
 /**
  * Class that contains the entry point for this application.
- * This is a template, you must change the package name.
- * @Author Marco Anton.
+ * Could have used JUnit testing.
+ *
+ * @author Marco Anton.
  */
 public class Driver {
 
@@ -36,7 +37,7 @@ public class Driver {
 
     /**
      * Tests the adding functionality of a linked list.
-     * @param llist is a linked list to test.
+     * @param l is a linked list to test.
      */
     public static void test_add(MyList<Integer> l) {
         System.out.println("\nAdd method:");
@@ -50,21 +51,29 @@ public class Driver {
             System.out.println("after:\t" + l.print());
         }
 
-
     }
 
     /**
      * Test the removing functionality of a linked list.
-     * @param llist is a linked list to be tested.
+     * @param l is a linked list to be tested.
      */
     public static void test_remove(MyList<Integer> l) {
         System.out.println("\nRemove method:");
 
-        System.out.println("removing:\t" + 15);
-        System.out.println("before:\t" + l.print());
-        l.remove(15);
-        System.out.println("after:\t" + l.print());
+        System.out.println("\nRemoving from begining to end");
+        for (int i = ELEM.length - 1; i >= 0; i--) {
+            System.out.println("removing:\t" + ELEM[i]);
+            System.out.println("before:\t" + l.print());
+            l.remove(ELEM[i]);
+            System.out.println("after:\t" + l.print());
+        }
 
+        test_add(l);
+
+        System.out.println("\nRemoving from end to begining")res. To avoid
+        potential overrides, use at least one period character (.) in custom
+        tag names.
+        ;
         for (int i = ELEM.length - 1; i >= 0; i--) {
             System.out.println("removing:\t" + ELEM[i]);
             System.out.println("before:\t" + l.print());
