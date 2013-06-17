@@ -70,10 +70,7 @@ public class Driver {
 
         test_add(l);
 
-        System.out.println("\nRemoving from end to begining")res. To avoid
-        potential overrides, use at least one period character (.) in custom
-        tag names.
-        ;
+        System.out.println("\nRemoving from end to begining");
         for (int i = ELEM.length - 1; i >= 0; i--) {
             System.out.println("removing:\t" + ELEM[i]);
             System.out.println("before:\t" + l.print());
